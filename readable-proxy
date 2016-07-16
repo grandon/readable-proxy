@@ -1,0 +1,32 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: 		readable-proxy
+# Required-Start: 	$local_fs $network
+# Required-Stop:	$local_fs $network
+# Default-Start: 	2 3 4 5
+# Default-Stop: 	0 1 6
+# Description: 		Readable Proxy
+### END INIT INFO
+
+USER="mahmovic"
+
+case "$1" in
+start)
+su $USER -c "forever start -c 'npm start' /home/mahmovic/git/readable-proxy"
+;;
+stop)
+su $USER -c "forever stop -c 'npm stop' /home/mahmovic/git/readable-proxy"
+;;
+restart)
+su $USER -c "forever stop -c 'npm stop' /home/mahmovic/git/readable-proxy"
+su $USER -c "forever start -c 'npm start' /home/mahmovic/git/readable-proxy"
+;;
+status)
+# Not Implemented
+;;
+*)
+echo "Usage: {start|stop|restart|status}" >&2
+exit 1
+;;
+esac
+exit 0
